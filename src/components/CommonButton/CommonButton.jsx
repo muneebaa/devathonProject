@@ -1,4 +1,5 @@
-const CommonButton = ({ title, onClick, variant }) => {
+import { FadeLoader } from "react-spinners";
+const CommonButton = ({ title, onClick, variant, loading }) => {
   return (
     <div
       onClick={onClick}
@@ -13,7 +14,7 @@ const CommonButton = ({ title, onClick, variant }) => {
           variant === "filled" ? "text-white" : "text-primary"
         }`}
       >
-        {title}
+        {loading ? "Loading..." : title}
       </p>
     </div>
   );
