@@ -9,6 +9,7 @@ import { RiInformation2Line } from "react-icons/ri";
 import "react-datepicker/dist/react-datepicker.css";
 import COLORS from "../../constants/constants";
 import { getApiWithAuth } from "../../apis/api";
+import { useNavigate } from "react-router-dom";
 
 const allAppointments = [
   {
@@ -41,13 +42,21 @@ const allAppointments = [
 ];
 
 const DoctorHome = () => {
-  const [isVisible, setIsVisible] = useState(false);
-
+  const navigate = useNavigate();
   return (
     <div>
       <Navbar />
       <div className="px-6" style={{ width: "80%", margin: "0 auto" }}>
-        <h1 className="text-3xl mt-10 font-semibold">Pending Appointments</h1>
+        <div className="flex items-center justify-between mt-10">
+          <h1 className="text-3xl  font-semibold">Pending Appointments</h1>
+          <div style={{ width: "200px" }}>
+            <CommonButton
+              title={"Add Availabilities"}
+              variant={"outlinend"}
+              onClick={() => navigate("/availabilities")}
+            />
+          </div>
+        </div>
         {allAppointments.map((item) => (
           <div
             className="flex items-center border border-gray100 p-7 rounded-2xl mt-6"
