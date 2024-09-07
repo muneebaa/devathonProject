@@ -43,15 +43,15 @@ const Login = () => {
     ) {
       console.log(formData);
       const res = await postAPIWithoutAuth("auth/login", {
-        // name: formData.name,
         username: formData.email,
         password: formData.password,
-        // role: formData.type,
+        role: formData.type,
       });
       if (res.status === 201) {
         setLoading(false);
         console.log("resss", res);
-        toast.success("Account loggedin successfully", {
+        navigate(formData.type === "patient" ? "/patient" : "/doctor");
+        toast.success("Account logged-in successfully", {
           position: "top-right",
           autoClose: 5000,
         });
@@ -125,8 +125,8 @@ const Login = () => {
                 <option value="" disabled>
                   Select Type
                 </option>
-                <option value="photographer">Photographer</option>
-                <option value="videographer">Videographer</option>
+                <option value="patient">Patient</option>
+                <option value="doctor">Doctor</option>
               </select>
               {errors.type && (
                 <p className="text-red text-xs mt-1">{errors.type}</p>

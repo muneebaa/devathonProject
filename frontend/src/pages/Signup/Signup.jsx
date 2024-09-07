@@ -76,6 +76,7 @@ const Signup = () => {
       if (res.status === 201) {
         setLoading(false);
         console.log("resss", res);
+        navigate(formData.type === "patient" ? "/patient" : "/doctor");
         toast.success("Account created successfully", {
           position: "top-right",
           autoClose: 5000,
