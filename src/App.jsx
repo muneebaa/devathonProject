@@ -7,6 +7,7 @@ import PublicRoute from "./utils/PublicRoute";
 import ProtectedRoute from "./utils/ProtectedRoute";
 import { store } from "./redux/store";
 import { Provider } from "react-redux";
+import PatientHome from "./pages/PatientHome";
 
 function App() {
   return (
@@ -30,13 +31,21 @@ function App() {
             }
           />
           <Route
+            path="/patient"
+            element={
+              <PublicRoute>
+                <PatientHome />
+              </PublicRoute>
+            }
+          />
+          {/* <Route
             path="/"
             element={
               <ProtectedRoute>
                 <Home />
               </ProtectedRoute>
             }
-          />
+          /> */}
         </Routes>
       </Router>
     </Provider>
