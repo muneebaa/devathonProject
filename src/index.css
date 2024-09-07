@@ -20,6 +20,9 @@ html {
 }
 
 :root {
+  --primary: #2bafc7;
+  --gray100: #e4dfdf;
+  --gray600: #747688;
 }
 
 a {
