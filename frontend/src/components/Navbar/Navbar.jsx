@@ -19,7 +19,7 @@ const Navbar = () => {
           <p className="text-white font-medium text-xl ml-2">Health App</p>
         </div>
       </div>
-      <div className="flex justify-between" style={{ width: "20%" }}>
+      {/* <div className="flex justify-between" style={{ width: "20%" }}>
         <Link to={"/"} className="text-white hover:underline hover:text-white">
           <p>Home</p>
         </Link>
@@ -30,7 +30,7 @@ const Navbar = () => {
           <p>Appointments</p>
         </Link>
         <p className="text-white  hover:text-white cursor-pointer">Logout</p>
-      </div>
+      </div> */}
     </div>
   );
 };
