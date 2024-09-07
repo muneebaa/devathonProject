@@ -9,6 +9,7 @@ import {
   isValidPassword,
   isValidPhoneNumber,
 } from "../../utils/helper";
+import doctorsStanding from "../../assets/doctors-standing.svg";
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -178,8 +179,10 @@ const Signup = () => {
       </div>
       <div
         style={{ width: "50%", height: "100vh" }}
-        className="bg-primary"
-      ></div>
+        className="bg-primary flex items-center justify-center"
+      >
+        <img src={doctorsStanding} className="" height={300} width={"90%"} />
+      </div>
     </div>
   );
 };

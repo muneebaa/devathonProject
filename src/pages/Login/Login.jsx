@@ -1,9 +1,10 @@
 import { useState } from "react";
 import CommonButton from "../../components/CommonButton";
 import CommonInput from "../../components/CommonInput";
-import Logo from "../../assets/Logo.png";
 import { useNavigate } from "react-router-dom";
 import { isValidEmail, isValidPassword } from "../../utils/helper";
+import Logo from "../../assets/Logo.png";
+import doctorsStanding from "../../assets/doctors-standing.svg";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -130,8 +131,10 @@ const Login = () => {
       </div>
       <div
         style={{ width: "50%", height: "100vh" }}
-        className="bg-primary"
-      ></div>
+        className="bg-primary flex items-center justify-center"
+      >
+        <img src={doctorsStanding} className="" height={300} width={"90%"} />
+      </div>
     </div>
   );
 };
