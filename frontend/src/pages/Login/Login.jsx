@@ -140,12 +140,12 @@ const Login = () => {
               />
             </div>
             <p className="text-gray600 mt-3 text-right">
-              Already have an account?{" "}
+              Don't have an account{" "}
               <span
-                onClick={() => navigate("/login")}
+                onClick={() => navigate("/signup")}
                 className="text-primary underline cursor-pointer"
               >
-                Login
+                Signup
               </span>
             </p>
           </div>
