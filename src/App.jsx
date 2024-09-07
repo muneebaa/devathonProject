@@ -8,10 +8,13 @@ import ProtectedRoute from "./utils/ProtectedRoute";
 import { store } from "./redux/store";
 import { Provider } from "react-redux";
 import PatientHome from "./pages/PatientHome";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   return (
     <Provider store={store}>
+      <ToastContainer />
+
       <Router>
         <Routes>
           <Route
