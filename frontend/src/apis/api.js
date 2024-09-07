@@ -1,13 +1,13 @@
 import axios from "axios";
 import { getAccessToken } from "../utils/localStorage";
 
-export const BASE_URL = "https://1t8sjf3k-5000.inc1.devtunnels.ms";
+export const BASE_URL = "http://localhost:5000";
 
 axios.defaults.baseURL = BASE_URL;
 
 export const postAPIWithoutAuth = async (url, body) => {
   try {
-    RemoveApiHeader();
+    // RemoveApiHeader();
     const res = await axios.post(url, body);
     return {
       data: res.data,
@@ -54,7 +54,7 @@ export const putAPIWithAuth = async (url, body) => {
 export const getApiWithAuth = async (url) => {
   try {
     // await setApiHeader();
-    const res = await axios.get(url);
+    const res = await axios.get(url, { withCredentials: true });
     return { data: res?.data, status: res.status, success: true };
   } catch (err) {
     return { data: err?.response?.data, success: false };
