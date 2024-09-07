@@ -9,6 +9,7 @@ import { store } from "./redux/store";
 import { Provider } from "react-redux";
 import PatientHome from "./pages/PatientHome";
 import { ToastContainer } from "react-toastify";
+import DoctorHome from "./pages/DoctorHome";
 
 function App() {
   return (
@@ -38,6 +39,14 @@ function App() {
             element={
               <PublicRoute>
                 <PatientHome />
+              </PublicRoute>
+            }
+          />
+          <Route
+            path="/doctor"
+            element={
+              <PublicRoute>
+                <DoctorHome />
               </PublicRoute>
             }
           />
