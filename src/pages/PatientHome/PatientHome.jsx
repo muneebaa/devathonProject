@@ -2,13 +2,14 @@ import Navbar from "../../components/Navbar";
 import userImage from "../../assets/doctorImage.png";
 import CommonButton from "../../components/CommonButton";
 import CommonModal from "../../components/CommonModal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import { addDays, isWithinInterval } from "date-fns";
 import { RiInformation2Line } from "react-icons/ri";
 import "react-datepicker/dist/react-datepicker.css";
 import "./style.css";
 import COLORS from "../../constants/constants";
+import { getApiWithAuth } from "../../apis/api";
 
 const doctorsArr = [
   {
@@ -67,6 +68,19 @@ const PatientHome = () => {
       return isWithinInterval(date, { start, end });
     });
   };
+
+  const getAllDoctors = async () => {
+    const res = await getApiWithAuth("api/doctors");
+    if (res.status === 200) {
+      console.log("res", res);
+    } else {
+      console.log("err", res);
+    }
+  };
+
+  useEffect(() => {
+    getAllDoctors();
+  }, []);
 
   return (
     <div>
@@ -135,9 +149,9 @@ const PatientHome = () => {
                 </div>
               </div>
             </div>
-            <div className="flex justify-end">
+            <div className="flex justify-end mt-5">
               <div style={{ width: 200 }}>
-                <CommonButton title={"Continue"} />
+                <CommonButton title={"Continue"} variant={"filled"} />
               </div>
             </div>
           </div>
