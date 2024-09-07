@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { isValidEmail, isValidPassword } from "../../utils/helper";
 import Logo from "../../assets/Logo.png";
 import doctorsStanding from "../../assets/doctors-standing.svg";
+import { postAPIWithoutAuth } from "../../apis/api";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -32,15 +33,36 @@ const Login = () => {
     setErrors((prev) => ({ ...prev, [name]: error }));
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const formErrors = validateForm();
     setErrors((prevErrors) => ({ ...prevErrors, ...formErrors }));
 
     if (
       Object.keys(formErrors).length === 0 &&
-      Object.keys(errors).length === 0
+      Object.values(errors).every((item) => item === null)
     ) {
       console.log(formData);
+      const res = await postAPIWithoutAuth("auth/login", {
+        // name: formData.name,
+        username: formData.email,
+        password: formData.password,
+        // role: formData.type,
+      });
+      if (res.status === 201) {
+        setLoading(false);
+        console.log("resss", res);
+        toast.success("Account loggedin successfully", {
+          position: "top-right",
+          autoClose: 5000,
+        });
+      } else {
+        setLoading(false);
+        toast.error(res.data.message, {
+          position: "top-right",
+          autoClose: 5000,
+        });
+        console.log("err--", res);
+      }
     }
   };
 

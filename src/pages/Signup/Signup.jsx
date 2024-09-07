@@ -10,10 +10,14 @@ import {
   isValidPhoneNumber,
 } from "../../utils/helper";
 import doctorsStanding from "../../assets/doctors-standing.svg";
+import { postAPIWithoutAuth } from "../../apis/api";
+import { SIGNUP_URL } from "../../apis/apiUrls";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Signup = () => {
   const navigate = useNavigate();
-
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
     name: "",
@@ -46,17 +50,44 @@ const Signup = () => {
     setErrors((prev) => ({ ...prev, [name]: error }));
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const formErrors = validateForm();
     // Merge previous errors with new ones if any exist
     setErrors((prevErrors) => ({ ...prevErrors, ...formErrors }));
-
+    console.log(
+      Object.keys(formErrors).length === 0,
+      Object.values(errors).every((item) => item === null),
+      Object.values(errors)
+    );
     // Check if there are any new or existing errors
     if (
       Object.keys(formErrors).length === 0 &&
-      Object.keys(errors).length === 0
+      Object.values(errors).every((item) => item === null)
     ) {
+      setLoading(true);
       console.log(formData);
+      const res = await postAPIWithoutAuth(SIGNUP_URL, {
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        password: formData.password,
+        role: formData.type,
+      });
+      if (res.status === 201) {
+        setLoading(false);
+        console.log("resss", res);
+        toast.success("Account created successfully", {
+          position: "top-right",
+          autoClose: 5000,
+        });
+      } else {
+        setLoading(false);
+        toast.error(res.data.message, {
+          position: "top-right",
+          autoClose: 5000,
+        });
+        console.log("err--", res);
+      }
     }
   };
 
@@ -151,8 +182,8 @@ const Signup = () => {
                 <option value="" disabled>
                   Select Type
                 </option>
-                <option value="photographer">Photographer</option>
-                <option value="videographer">Videographer</option>
+                <option value="doctor">Doctor</option>
+                <option value="patient">Patient</option>
               </select>
               {errors.type && (
                 <p className="text-red text-xs mt-1">{errors.type}</p>
@@ -163,6 +194,7 @@ const Signup = () => {
                 title={"Submit"}
                 variant={"filled"}
                 onClick={handleSubmit}
+                loading={loading}
               />
             </div>
             <p className="text-gray600 mt-3 text-right">
