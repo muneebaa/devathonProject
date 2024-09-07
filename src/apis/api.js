@@ -1,7 +1,7 @@
 import axios from "axios";
 import { getAccessToken } from "../utils/localStorage";
 
-export const BASE_URL = "https://1t8sjf3k-5000.inc1.devtunnels.ms/test";
+export const BASE_URL = "https://1t8sjf3k-5000.inc1.devtunnels.ms";
 
 axios.defaults.baseURL = BASE_URL;
 
@@ -53,7 +53,7 @@ export const putAPIWithAuth = async (url, body) => {
 
 export const getApiWithAuth = async (url) => {
   try {
-    await setApiHeader();
+    // await setApiHeader();
     const res = await axios.get(url);
     return { data: res?.data, status: res.status, success: true };
   } catch (err) {
@@ -81,9 +81,9 @@ export const deleteApi = async (url) => {
   }
 };
 
-const setApiHeader = async () => {
-  axios.defaults.headers.common.Authorization = await getAccessToken();
-};
+// const setApiHeader = async () => {
+//   axios.defaults.headers.common.Authorization = await getAccessToken();
+// };
 
 const RemoveApiHeader = () => {
   delete axios.defaults.headers.common.Authorization;
